@@ -1,0 +1,25 @@
+<h3>What do you think the password is?</h3>
+<form action='/guess' method='post' id='guesser'>
+  <input type='password' name='password' id='pwd'>
+  <button type='submit'>
+    Guess!
+  </button>
+</form>
+<p>
+Last guess was at <span class='time'></span>
+</p>
+
+<script src="/jquery-2.0.3.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('#guesser').on('submit', function(event){
+      event.preventDefault();
+
+      $.post('/guess', $(this).serialize(), function(response) {
+        alert(response.message);
+        $(".time").text(response.time)
+      });
+      // alert('Hello');
+    })
+  })
+</script>
