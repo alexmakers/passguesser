@@ -5,9 +5,16 @@
     Guess!
   </button>
 </form>
+
 <p>
 Last guess was at <span class='time'></span>
 </p>
+
+<h3>Autocomplete</h3>
+<input type='text' id='autocomplete' placeholder='Start typing a word'>
+
+<ul class='suggestions'>
+</ul>
 
 <script src="/jquery-2.0.3.min.js"></script>
 <script>
@@ -20,6 +27,20 @@ Last guess was at <span class='time'></span>
         $(".time").text(response.time)
       });
       // alert('Hello');
+    })
+
+    $('#autocomplete').on('keyup', function(){
+      $.get('/autocomplete', { text: $(this).val() }, function(suggestions) {
+
+        $('.suggestions li').remove();
+
+        suggestions.forEach(function(suggestion) {
+          var dropdownItem = '<li>' + suggestion + '</li>'
+
+          $('.suggestions').append(dropdownItem);
+        })
+
+      })
     })
   })
 </script>

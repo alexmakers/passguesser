@@ -1,0 +1,8 @@
+body {
+  margin: 40px;
+}
+
+input, h3, button, ul li, p {
+  font-family: Helvetica Neue;
+  font-size: 20px;
+}
